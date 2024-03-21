@@ -6,10 +6,10 @@ An interactive program that allows the user to practice their basic maths with o
 ## Getting started
 ### Compile
 In the same directory as the `main.cpp`, enter the following command in your terminal of choice to compile the code into an executable named `CAI.exe`:<br>
-`g++ -o CAI.exe -std=c++20 main.cpp`
+`g++ -o -std=c++20 main.cpp`
 
 ### Run
-Enter `.\CAI` into terminal. You will then choose the difficulty and a mode of operation.
+Enter `.\main` into terminal. You will then choose the difficulty and a mode of operation.
 
 #### Difficulty
 ```
