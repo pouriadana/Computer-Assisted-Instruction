@@ -129,16 +129,16 @@ void response(bool outcome)
 		switch (const int select{ rand() % 4 })
 		{
 		case 0:
-			std::cout << "No, please try again: ";
+			std::cout << "Incorrect. Please try again: ";
 			break;
 		case 1:
-			std::cout << "Wrong. Try once more: ";
+			std::cout << "That's not quite right. Try once more: ";
 			break;
 		case 2:
-			std::cout << "Don't give up: ";
+			std::cout << "Incorrect, but don't give up. Give it another shot: ";
 			break;
 		case 3:
-			std::cout << "No. Keep trying: ";
+			std::cout << "Wrong answer. Keep trying: ";
 			break;
 		}
 	}
@@ -167,8 +167,13 @@ int chooseDifficulty()
 	std::cout << "1 - Easy (single digit)\n2 - Medium (double digit)\n3 - Hard (triple digit)\n";
 	std::cout << "--> ";
 	int difficulty;
-	std::cin >> difficulty;
 
+	while (!(std::cin >> difficulty) || difficulty < 1 || difficulty > 3)
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "Invalid choice. Please enter a number between 1 and 3: ";
+	}
 	return difficulty;
 }
 
@@ -177,7 +182,12 @@ int chooseOp()
 	std::cout << "Select an operation mode for questions:\n";
 	std::cout << "1 - Addition\n2 - Subtraction\n3 - Multiplication\n4 - Division\n5 - Random\n--> ";
 	int opMode;
-	std::cin >> opMode;
 
+	while (!(std::cin >> opMode) || opMode < 1 || opMode > 5)
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "Invalid choice. Please enter a number between 1 and 5: ";
+	}
 	return opMode;
 }
