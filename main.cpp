@@ -62,8 +62,8 @@ int main()
 
 int promptQuestion(int difficulty, int operation)
 {
-	static random_device rd;
-	static default_random_engine engine{ rd() };
+	static std::random_device rd;
+	static std::default_random_engine engine{ rd() };
 
 	int val_1;
 	int val_2;
@@ -71,21 +71,21 @@ int promptQuestion(int difficulty, int operation)
 	{
 		case 1:
 		{
-			static uniform_int_distribution<int> selectOneDigit{ 0, 9 };
+			static std::uniform_int_distribution<int> selectOneDigit{ 0, 9 };
 			val_1 = selectOneDigit(engine);
 			val_2 = selectOneDigit(engine);
 			break;
 		}
 		case 2:
 		{
-			static uniform_int_distribution<int> selectTwoDigit{ 10, 99 };
+			static std::uniform_int_distribution<int> selectTwoDigit{ 10, 99 };
 			val_1 = selectTwoDigit(engine);
 			val_2 = selectTwoDigit(engine);
 			break;
 		}
 		case 3:
 		{
-			static uniform_int_distribution<int> selectThreeDigit{ 100, 999 };
+			static std::uniform_int_distribution<int> selectThreeDigit{ 100, 999 };
 			val_1 = selectThreeDigit(engine);
 			val_2 = selectThreeDigit(engine);
 			break;
@@ -129,16 +129,16 @@ void response(bool outcome)
 		switch (const int select{ rand() % 4 })
 		{
 		case 0:
-			cout << "No, please try again: ";
+			std::cout << "No, please try again: ";
 			break;
 		case 1:
-			cout << "Wrong. Try once more: ";
+			std::cout << "Wrong. Try once more: ";
 			break;
 		case 2:
-			cout << "Don't give up: ";
+			std::cout << "Don't give up: ";
 			break;
 		case 3:
-			cout << "No. Keep trying: ";
+			std::cout << "No. Keep trying: ";
 			break;
 		}
 	}
@@ -147,16 +147,16 @@ void response(bool outcome)
 		switch (const int select{ rand() % 4 })
 		{
 		case 0:
-			cout << "Very good!\n";
+			std::cout << "Very good!\n";
 			break;
 		case 1:
-			cout << "Excellent!\n";
+			std::cout << "Excellent!\n";
 			break;
 		case 2:
-			cout << "Nice work!\n";
+			std::cout << "Nice work!\n";
 			break;
 		case 3:
-			cout << "Keep up the good work!\n";
+			std::cout << "Keep up the good work!\n";
 		}
 	}
 }
