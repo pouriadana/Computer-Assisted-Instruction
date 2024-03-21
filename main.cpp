@@ -1,3 +1,4 @@
+#include <array>
 #include <random>
 #include <iostream>
 
@@ -65,32 +66,17 @@ int promptQuestion(int difficulty, int operation)
 	static std::random_device rd;
 	static std::default_random_engine engine{ rd() };
 
+	static std::uniform_int_distribution<int> distributions[] = {
+		std::uniform_int_distribution<int>{0, 9},
+		std::uniform_int_distribution<int>{10, 99},
+		std::uniform_int_distribution<int>{100, 999}
+	};
+
 	int val_1;
 	int val_2;
-	switch (difficulty)
-	{
-		case 1:
-		{
-			static std::uniform_int_distribution<int> selectOneDigit{ 0, 9 };
-			val_1 = selectOneDigit(engine);
-			val_2 = selectOneDigit(engine);
-			break;
-		}
-		case 2:
-		{
-			static std::uniform_int_distribution<int> selectTwoDigit{ 10, 99 };
-			val_1 = selectTwoDigit(engine);
-			val_2 = selectTwoDigit(engine);
-			break;
-		}
-		case 3:
-		{
-			static std::uniform_int_distribution<int> selectThreeDigit{ 100, 999 };
-			val_1 = selectThreeDigit(engine);
-			val_2 = selectThreeDigit(engine);
-			break;
-		}
-	}
+	
+	val_1 = distributions[difficulty - 1](engine);
+	val_2 = distributions[difficulty - 1](engine);
 
 	if (operation == 5)
 	{
