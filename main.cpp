@@ -164,7 +164,7 @@ void response(bool outcome)
 int chooseDifficulty()
 {
 	std::cout << "Choose a difficulty level:\n";
-	std::cout << "1 - Easy (single digit)\n2 - Medium (two-digit)\n3 - Hard (triple digit)\n";
+	std::cout << "1 - Easy (single digit)\n2 - Medium (double digit)\n3 - Hard (triple digit)\n";
 	std::cout << "--> ";
 	int difficulty;
 	std::cin >> difficulty;
