@@ -1,4 +1,3 @@
-#include <array>
 #include <random>
 #include <iostream>
 
@@ -14,7 +13,16 @@ int main()
 	int correctAnswersCount{ 0 };
 
 	int difficulty{ chooseDifficulty() };
+	if (-1 == difficulty)
+	{
+		return 1;
+	}
+
 	int operation{ chooseOp() };
+	if (-1 == operation)
+	{
+		return 1;
+	}
 
 	while (userAnswer != -1)
 	{
@@ -149,28 +157,41 @@ void response(bool outcome)
 
 int chooseDifficulty()
 {
-	std::cout << "Choose a difficulty level:\n";
+	std::cout << "Choose a difficulty level (-1 to quit):\n";
 	std::cout << "1 - Easy (single digit)\n2 - Medium (double digit)\n3 - Hard (triple digit)\n";
 	std::cout << "--> ";
-	int difficulty;
+	int difficulty{};
 
 	while (!(std::cin >> difficulty) || difficulty < 1 || difficulty > 3)
 	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "Invalid choice. Please enter a number between 1 and 3: ";
+		// Exit the program
+		if (-1 == difficulty)
+		{
+			return -1;
+		}
+		else
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid choice. Please enter a number between 1 and 3: ";
+		}
 	}
 	return difficulty;
 }
 
 int chooseOp()
 {
-	std::cout << "Select an operation mode for questions:\n";
+	std::cout << "Select an operation mode for questions (-1 to quit):\n";
 	std::cout << "1 - Addition\n2 - Subtraction\n3 - Multiplication\n4 - Division\n5 - Random\n--> ";
 	int opMode;
 
 	while (!(std::cin >> opMode) || opMode < 1 || opMode > 5)
 	{
+		// Exit the program
+		if (-1 == opMode)
+		{
+			return  -1;
+		}
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cout << "Invalid choice. Please enter a number between 1 and 5: ";
