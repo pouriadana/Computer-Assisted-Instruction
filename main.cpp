@@ -24,10 +24,10 @@ int main()
 		return 1;
 	}
 
-	while (userAnswer != -1)
+	while (userAnswer != -999)
 	{
 		int correctAnswer{ promptQuestion(difficulty, operation) };
-		std::cout << "Enter your answer: ";
+		std::cout << "Enter your answer (-999 to quit): ";
 		std::cin >> userAnswer;
 		answersCount++;
 
