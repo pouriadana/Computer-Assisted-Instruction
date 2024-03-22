@@ -1,6 +1,8 @@
+#include <limits>
 #include <random>
 #include <iostream>
 
+// Function prototypes
 int promptQuestion(int difficulty, int operation);
 void response(bool outcome);
 int chooseDifficulty();
@@ -8,29 +10,37 @@ int chooseOp();
 
 int main()
 {
-	int userAnswer{ 1 };
-	int answersCount{ 0 };
-	int correctAnswersCount{ 0 };
+	int userAnswer{ 0 }; // Set to a default value to enter the loop
+	int answersCount{ 0 }; // Fresh start
+	int correctAnswersCount{ 0 }; // Fresh start
 
+	// Allow early exit
 	int difficulty{ chooseDifficulty() };
 	if (-1 == difficulty)
 	{
 		return 1;
 	}
 
+	// Allow early exit
 	int operation{ chooseOp() };
 	if (-1 == operation)
 	{
 		return 1;
 	}
 
-	while (userAnswer != -999)
+	while (true)
 	{
 		int correctAnswer{ promptQuestion(difficulty, operation) };
 		std::cout << "Enter your answer (-999 to quit): ";
 		std::cin >> userAnswer;
 		answersCount++;
+		// Check for early exit
+		if (-999 == userAnswer)
+		{
+			return 1;
+		}
 
+		// Process incorrect answers
 		while ((userAnswer != correctAnswer) && (userAnswer != -1))
 		{
 			response(false);
@@ -42,12 +52,14 @@ int main()
 			}
 		}
 
+		// Process correct answers
 		if (userAnswer == correctAnswer)
 		{
 			response(true);
 			correctAnswersCount++;
 		}
 
+		// One round of questions ends. Give appropriate feedback. Reset the program
 		if (answersCount == 10)
 		{
 			double percentage{ correctAnswersCount / 10.0 };
@@ -63,29 +75,40 @@ int main()
 			answersCount = 0;
 			correctAnswersCount = 0;
 
-			difficulty = chooseDifficulty();
-			operation = chooseOp();
+			if (-1 == (difficulty = chooseDifficulty()))
+			{
+				return 1;
+			}
+			
+			if (-1 == (operation = chooseOp()))
+			{
+				return -1;
+			}
 		}
 	}
 }
 
 int promptQuestion(int difficulty, int operation)
 {
-	static std::random_device rd;
-	static std::default_random_engine engine{ rd() };
+	static std::random_device rd; // a one-time seed
+	static std::default_random_engine engine{ rd() }; // an engine created once with a given seed
 
+	// An array of objects each of which specifies a range
 	static std::uniform_int_distribution<int> distributions[] = {
 		std::uniform_int_distribution<int>{0, 9},
 		std::uniform_int_distribution<int>{10, 99},
 		std::uniform_int_distribution<int>{100, 999}
 	};
 
-	int val_1;
-	int val_2;
+	int val_1{};
+	int val_2{};
 	
 	val_1 = distributions[difficulty - 1](engine);
 	val_2 = distributions[difficulty - 1](engine);
 
+	// If user selects random operaitons, a random operation
+	// is selected for each question in a single round of q-
+	// estions
 	if (operation == 5)
 	{
 		operation = 1 + rand() % 4;
@@ -116,11 +139,17 @@ int promptQuestion(int difficulty, int operation)
 
 void response(bool outcome)
 {
-	srand(time(nullptr));
+	//srand(time(nullptr));
+	static std::random_device rd;
+	static std::default_random_engine engine{ rd() };
+	static std::uniform_int_distribution<int> distribution{
+		std::numeric_limits<int>::min(),
+		std::numeric_limits<int>::max()
+	};
 
 	if (false == outcome)
 	{
-		switch (const int select{ rand() % 4 })
+		switch (const int select{ distribution(engine) % 4 })
 		{
 		case 0:
 			std::cout << "Incorrect. Please try again: ";
@@ -138,7 +167,7 @@ void response(bool outcome)
 	}
 	else
 	{
-		switch (const int select{ rand() % 4 })
+		switch (const int select{ distribution(engine) % 4 })
 		{
 		case 0:
 			std::cout << "Very good!\n";
