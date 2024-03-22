@@ -28,7 +28,7 @@ int main()
 		return 1;
 	}
 
-	while (true)
+	while (-999 != userAnswer)
 	{
 		int correctAnswer{ promptQuestion(difficulty, operation) };
 		std::cout << "Enter your answer (-999 to quit): ";
@@ -41,7 +41,7 @@ int main()
 		}
 
 		// Process incorrect answers
-		while ((userAnswer != correctAnswer) && (userAnswer != -1))
+		while ((userAnswer != correctAnswer) && (userAnswer != -999))
 		{
 			response(false);
 			std::cin >> userAnswer;
