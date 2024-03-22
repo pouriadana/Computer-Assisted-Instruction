@@ -9,7 +9,7 @@ In the same directory as the `main.cpp`, enter the following command in your ter
 `g++ -o -std=c++20 main.cpp`
 
 ### Run
-Enter `.\main` into terminal. You will then choose the difficulty and a mode of operation.
+Type `.\a` into terminal. You will then choose the difficulty and a mode of operation.
 
 #### Difficulty
 ```
