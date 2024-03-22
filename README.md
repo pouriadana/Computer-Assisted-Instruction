@@ -5,7 +5,7 @@ An interactive program that allows the user to practice their basic maths with o
 
 ## Getting started
 ### Compile
-In the same directory as the `main.cpp`, enter the following command in your terminal of choice to compile the code into an executable named `CAI.exe`:<br>
+In the same directory as the `main.cpp`, enter the following command in your terminal of choice to compile the code into an executable named `a.exe`:<br>
 `g++ -o -std=c++20 main.cpp`
 
 ### Run
@@ -32,4 +32,4 @@ Select an operation mode for questions:
 ```
 
 ### Exit
-After having selected the difficulty & mode of operation, simply enter `-1` to exit.
+After having selected the difficulty & mode of operation, simply enter `-999` to exit.
